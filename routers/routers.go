@@ -14,6 +14,7 @@ func GetRouter() *gin.Engine {
 	// Routes for /instruments endpoint
 	r.GET("/instruments", controllers.ReturnAllInstruments)
 	r.GET("/instruments/:id", controllers.ReturnSingleInstrument)
+	r.POST("/instruments", controllers.CreateSingleInstrument)
 	//return router
 	return r
 }

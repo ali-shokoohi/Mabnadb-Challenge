@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "7cdc606d-0526-417e-823e-b19dd529431c",
+		"name": "Mabnadb-Challenge",
+		"description": "APIs for the Mabnadb-Challengs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Instruments",
+			"item": [
+				{
+					"name": "Get Instruments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/instruments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"instruments"
+							]
+						},
+						"description": "Get all of the Instruments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Instrument",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/instruments/{{$randomInt}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"instruments",
+								"{{$randomInt}}"
+							]
+						},
+						"description": "Get a single instrument"
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Instruments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Test\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/instruments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"instruments"
+							]
+						},
+						"description": "Create A single new instrument"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Instrument",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/instruments/{{$randomInt}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"instruments",
+								"{{$randomInt}}"
+							]
+						},
+						"description": "Delete a single instrument"
+					},
+					"response": []
+				}
+			],
+			"description": "Instrument's APIs",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "c2c2305c-999c-47fa-b241-dee7b35ca560",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "384d9f0e-8ccc-49d8-8f93-665308e51167",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Trades",
+			"item": [
+				{
+					"name": "Get Trades",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/trades",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trades"
+							]
+						},
+						"description": "Get all of the Instruments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Trade",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/trades/{{$randomInt}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trades",
+								"{{$randomInt}}"
+							]
+						},
+						"description": "Get a single trade\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Trade",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "430d208f-3c36-4ce1-9d36-886bc481f926",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"open\": 14,\n    \"close\": 18,\n    \"high\": 2,\n    \"low\": 5,\n    \"date_en\": \"2020-04-07T00:00:00Z\",\n    \"instrument_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/trades",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trades"
+							]
+						},
+						"description": "Create A single new trade"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete A Trade",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/trades/{{$randomInt}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"trades",
+								"{{$randomInt}}"
+							]
+						},
+						"description": "Delete a single trade\n"
+					},
+					"response": []
+				}
+			],
+			"description": "Trade's APIs",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "07d84e0e-9495-4c3b-98ee-e42860ea2d4f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8b2536f1-a0c9-4550-9a4c-afcb11a2254e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "102c5e95-8802-4875-829e-3029cd5b35a1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0a5780a5-56d2-4f84-a411-efb301f194a7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "08209cfe-74bb-4b18-8a47-b926bf7ae908",
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

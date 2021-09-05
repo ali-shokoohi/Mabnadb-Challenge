@@ -45,13 +45,13 @@ func TestReturnSingleInstrument(t *testing.T) {
 	// Check response status code must be 200
 	assert.Equal(t, 200, response.Result().StatusCode, fmt.Sprintf("Response code be: %d ! But It's: %d!!!", 200, response.Result().StatusCode))
 
-	// Checks response type via convert response body type from []bytes to the []Instrument model type
+	// Checks response type via convert response body type from []bytes to the Instrument model type
 	var result models.Instrument
 	err = json.Unmarshal(response.Body.Bytes(), &result)
 	assert.Nil(t, err, "Can't convert response body type to Instrument model type")
 }
 
-// TestCreateSingleInstrument - Unit test for CreateSingleInstrument and DeleteSingleInstrument controllers
+// TestCreateDeleteSingleInstrument - Unit test for CreateSingleInstrument and DeleteSingleInstrument controllers
 func TestCreateDeleteSingleInstrument(t *testing.T) {
 	// Create request body
 	instrument := map[string]string{"name": "Test"}

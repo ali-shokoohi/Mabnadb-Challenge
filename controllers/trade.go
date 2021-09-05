@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -41,6 +42,7 @@ func CreateSingleTrade(c *gin.Context) {
 	var trade models.Trade
 	err := c.BindJSON(&trade)
 	if err != nil {
+		log.Println("Error: ", err, err.Error())
 		c.AbortWithStatusJSON(http.StatusBadRequest, "Send a valid instrument's structure!")
 		return
 	}
@@ -49,4 +51,22 @@ func CreateSingleTrade(c *gin.Context) {
 	db.Create(&trade)
 	// Send response to the request
 	c.JSON(http.StatusCreated, trade)
+}
+
+// DeleteSingleTrade - Delete a single trade from database via its ID
+func DeleteSingleTrade(c *gin.Context) {
+	// Get ID from params
+	id, exists := c.Params.Get("id")
+	if !exists {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "You must send id in params!")
+	}
+	// Get database client
+	db := databases.GetPostgres()
+	// Find all instrument objects
+	var trade models.Trade
+	db.Preload("Trades").First(&trade, id)
+	// Delete that instrument object
+	db.Delete(&trade)
+	// Send response to the request
+	c.JSON(http.StatusOK, trade)
 }

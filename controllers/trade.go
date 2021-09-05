@@ -34,3 +34,19 @@ func ReturnSingleTrade(c *gin.Context) {
 	// Send response to request
 	c.JSON(http.StatusOK, trade)
 }
+
+// CreateSingleTrade - Create A single trade objects to database
+func CreateSingleTrade(c *gin.Context) {
+	// Create a instance of our model with request data
+	var trade models.Trade
+	err := c.BindJSON(&trade)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Send a valid instrument's structure!")
+		return
+	}
+	// Sumbit to the database
+	db := databases.GetPostgres()
+	db.Create(&trade)
+	// Send response to the request
+	c.JSON(http.StatusCreated, trade)
+}

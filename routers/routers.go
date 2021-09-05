@@ -19,6 +19,7 @@ func GetRouter() *gin.Engine {
 	// Routes for /trades... endpoints
 	r.GET("/trades", controllers.ReturnAllTrades)
 	r.GET("/trades/:id", controllers.ReturnSingleTrade)
+	r.POST("/trades", controllers.CreateSingleTrade)
 	//return router
 	return r
 }

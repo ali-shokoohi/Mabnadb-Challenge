@@ -11,6 +11,8 @@ func GetRouter() *gin.Engine {
 	r := gin.New()
 	// Route for "/" endpoint
 	r.Any("/", controllers.HomePage)
+	// Routes for /instruments endpoint
+	r.GET("/instruments", controllers.ReturnAllInstruments)
 	//return router
 	return r
 }

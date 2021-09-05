@@ -18,6 +18,7 @@ func GetRouter() *gin.Engine {
 	r.DELETE("/instruments/:id", controllers.DeleteSingleInstrument)
 	// Routes for /trades... endpoints
 	r.GET("/trades", controllers.ReturnAllTrades)
+	r.GET("/trades/:id", controllers.ReturnSingleTrade)
 	//return router
 	return r
 }

@@ -48,5 +48,23 @@ func CreateSingleInstrument(c *gin.Context) {
 	db := databases.GetPostgres()
 	db.Create(&instrument)
 	// Send response to the request
+	c.JSON(http.StatusCreated, instrument)
+}
+
+// DeleteSingleInstrument - Delete a single instrument from database via its ID
+func DeleteSingleInstrument(c *gin.Context) {
+	// Get ID from params
+	id, exists := c.Params.Get("id")
+	if !exists {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "You must send id in params!")
+	}
+	// Get database client
+	db := databases.GetPostgres()
+	// Find all instrument objects
+	var instrument models.Instrument
+	db.Preload("Trades").First(&instrument, id)
+	// Delete that instrument object
+	db.Delete(&instrument)
+	// Send response to the request
 	c.JSON(http.StatusOK, instrument)
 }

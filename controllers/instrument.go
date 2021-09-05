@@ -34,3 +34,19 @@ func ReturnSingleInstrument(c *gin.Context) {
 	// Send response to request
 	c.JSON(http.StatusOK, instrument)
 }
+
+// CreateSingleInstrument - Create A single instrument objects to database
+func CreateSingleInstrument(c *gin.Context) {
+	// Create a instance of our model with request data
+	var instrument models.Instrument
+	err := c.BindJSON(&instrument)
+	if err != nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Send a valid instrument's structure!")
+		return
+	}
+	// Sumbit to the database
+	db := databases.GetPostgres()
+	db.Create(&instrument)
+	// Send response to the request
+	c.JSON(http.StatusOK, instrument)
+}

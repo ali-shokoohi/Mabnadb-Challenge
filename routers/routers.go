@@ -20,6 +20,7 @@ func GetRouter() *gin.Engine {
 	r.GET("/trades", controllers.ReturnAllTrades)
 	r.GET("/trades/:id", controllers.ReturnSingleTrade)
 	r.POST("/trades", controllers.CreateSingleTrade)
+	r.DELETE("/trades/:id", controllers.DeleteSingleTrade)
 	//return router
 	return r
 }

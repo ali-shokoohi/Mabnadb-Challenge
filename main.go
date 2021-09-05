@@ -3,10 +3,12 @@ package main
 import (
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/joho/godotenv"
 	"gitlab.com/shokoohi/mabnadp-challenge/models"
 	"gitlab.com/shokoohi/mabnadp-challenge/routers"
+	"gitlab.com/shokoohi/mabnadp-challenge/utils/cli"
 )
 
 func main() {
@@ -17,6 +19,17 @@ func main() {
 	}
 	// Initialize models and objects
 	models.LoadModels()
+	// Check command line arguments for AutoCreate method
+	if len(os.Args) >= 3 && os.Args[1] == "create" {
+		max, err := strconv.Atoi(os.Args[2])
+		if err != nil {
+			log.Fatalln("Input valid max number, ", err.Error())
+			return
+		}
+		// Create some task records as max limit number
+		cli.AutoCreate(uint(max))
+		return
+	}
 	// Get address and port values from os's environments
 	var (
 		address = os.Getenv("listen_address")

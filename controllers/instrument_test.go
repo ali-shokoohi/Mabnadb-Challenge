@@ -51,8 +51,8 @@ func TestReturnSingleInstrument(t *testing.T) {
 	assert.Nil(t, err, "Can't convert response body type to Instrument model type")
 }
 
-// TestCreateSingleInstrument - Unit test for CreateSingleInstrument controller
-func TestCreateSingleInstrument(t *testing.T) {
+// TestCreateSingleInstrument - Unit test for CreateSingleInstrument and DeleteSingleInstrument controllers
+func TestCreateDeleteSingleInstrument(t *testing.T) {
 	// Create request body
 	instrument := map[string]string{"name": "Test"}
 	requestBody, err := json.Marshal(instrument)
@@ -66,9 +66,22 @@ func TestCreateSingleInstrument(t *testing.T) {
 	response := httptest.NewRecorder()
 	router.ServeHTTP(response, request)
 	// Check response status code must be 200
-	assert.Equal(t, 200, response.Result().StatusCode, fmt.Sprintf("Response code be: %d ! But It's: %d!!!", 200, response.Result().StatusCode))
-	// Checks response type via convert response body type from []bytes to the []Instrument model type
+	assert.Equal(t, 201, response.Result().StatusCode, fmt.Sprintf("Response code be: %d ! But It's: %d!!!", 200, response.Result().StatusCode))
+	// Checks response type via convert response body type from []bytes to the Instrument model type
 	var result models.Instrument
+	err = json.Unmarshal(response.Body.Bytes(), &result)
+	assert.Nil(t, err, "Can't convert response body type to Instrument model type")
+	// Result values must be equal to request's value
+	assert.Equal(t, instrument["name"], result.Name, fmt.Sprintf("Response must be: %#v! But It's: %#v !!!", instrument, result))
+	// Create a http request
+	request, err = http.NewRequest("DELETE", fmt.Sprintf("/instruments/%d", result.ID), nil)
+	// Check we have no error
+	assert.Nil(t, err, "Request error must be Nil!")
+	response = httptest.NewRecorder()
+	router.ServeHTTP(response, request)
+	// Check response status code must be 200
+	assert.Equal(t, 200, response.Result().StatusCode, fmt.Sprintf("Response code be: %d ! But It's: %d!!!", 200, response.Result().StatusCode))
+	// Checks response type via convert response body type from []bytes to the Instrument model type
 	err = json.Unmarshal(response.Body.Bytes(), &result)
 	assert.Nil(t, err, "Can't convert response body type to Instrument model type")
 	// Result values must be equal to request's value

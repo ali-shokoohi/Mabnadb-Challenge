@@ -15,6 +15,7 @@ func GetRouter() *gin.Engine {
 	r.GET("/instruments", controllers.ReturnAllInstruments)
 	r.GET("/instruments/:id", controllers.ReturnSingleInstrument)
 	r.POST("/instruments", controllers.CreateSingleInstrument)
+	r.DELETE("/instruments/:id", controllers.DeleteSingleInstrument)
 	//return router
 	return r
 }

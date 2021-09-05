@@ -84,6 +84,6 @@ func TestCreateDeleteSingleInstrument(t *testing.T) {
 	// Checks response type via convert response body type from []bytes to the Instrument model type
 	err = json.Unmarshal(response.Body.Bytes(), &result)
 	assert.Nil(t, err, "Can't convert response body type to Instrument model type")
-	// Result values must be equal to request's value
+	// Result values must be equal to created object's value
 	assert.Equal(t, instrument["name"], result.Name, fmt.Sprintf("Response must be: %#v! But It's: %#v !!!", instrument, result))
 }

@@ -13,6 +13,7 @@ func GetRouter() *gin.Engine {
 	r.Any("/", controllers.HomePage)
 	// Routes for /instruments endpoint
 	r.GET("/instruments", controllers.ReturnAllInstruments)
+	r.GET("/instruments/:id", controllers.ReturnSingleInstrument)
 	//return router
 	return r
 }

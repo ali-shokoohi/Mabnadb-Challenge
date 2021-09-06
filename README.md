@@ -3,6 +3,10 @@
 My answer to the Mabnadp's challenge.
 Written in Go, Gin, Gorm, PostgreSQL and etc...
 
+## Documents
+
+You can see all of API's documents in [docs/](./docs/) directory
+
 ## Configure
 
 ### Configure your Go:

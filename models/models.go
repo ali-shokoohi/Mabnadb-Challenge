@@ -60,3 +60,14 @@ func LoadQueries() {
 	(1, 2, '2020-01-01', 1006, 2006, 306, 4006)
 	(1, 1, '2020-01-01', 1007, 2007, 307, 4007)`
 }
+
+func GetLasts() (Instrument, Trade) {
+	var instruments []Instrument
+	var trades []Trade
+	// Get database client from our databases package
+	db := databases.GetPostgres()
+	db.Find(&instruments)
+	db.Find(&trades)
+	return instruments[len(instruments)-1], trades[len(trades)-1]
+
+}

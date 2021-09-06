@@ -19,6 +19,7 @@ func main() {
 	}
 	// Initialize models and objects
 	models.LoadModels()
+	models.LoadQueries()
 	// Check command line arguments for AutoCreate method
 	if len(os.Args) >= 3 && os.Args[1] == "create" {
 		max, err := strconv.Atoi(os.Args[2])

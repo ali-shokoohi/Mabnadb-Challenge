@@ -62,12 +62,14 @@ func LoadQueries() {
 }
 
 func GetLasts() (Instrument, Trade) {
-	var instruments []Instrument
-	var trades []Trade
+	var instrument Instrument
+	var trade Trade
 	// Get database client from our databases package
 	db := databases.GetPostgres()
-	db.Find(&instruments)
-	db.Find(&trades)
-	return instruments[len(instruments)-1], trades[len(trades)-1]
+	// Get last objects from database
+	db.Preload("Trades").Last(&instrument)
+	db.Last(&trade)
+	// Return objects
+	return instrument, trade
 
 }

@@ -61,7 +61,7 @@ docker-compose up --build -d
 After a while, you can see you did it!
 You can open your browser as localhost:_PORT_
 The PORT is that value you defined in the _.env_ file,
-Or 8090 as default.
+Or 8080 as default.
 
 ### Run as classic way:
 

@@ -1,6 +1,8 @@
 package models
 
 import (
+	"log"
+
 	"gitlab.com/shokoohi/mabnadp-challenge/databases"
 	"gitlab.com/shokoohi/mabnadp-challenge/utils"
 )
@@ -27,4 +29,34 @@ func LoadModels() {
 	}
 	// Submit trades to the database
 	db.Create(&trades)
+}
+
+// LoadQueries - Execute queries directly
+func LoadQueries() {
+	// Get database client from our databases package
+	db := databases.GetPostgres()
+	// Send queries
+	// Create tables
+	tx := db.Exec("CREATE TABLE IF NOT EXISTS Instrument‬‬(ID int, Name varchar(255))")
+	if tx.Error != nil {
+		log.Fatalln("Can't send query: ", tx.Error)
+	}
+	tx = db.Exec("CREATE TABLE IF NOT Exists Trade(ID int, InstrumentID int, DateEn timestamptz, Open decimal, High decimal, Low decimal, Close decimal)")
+	if tx.Error != nil {
+		log.Fatalln("Can't send query: ", tx.Error)
+	}
+	// Insert values
+	insertStmt := `insert into Instrument‬‬ values(1, 'AAPL'), (2, 'GOOGLE')`
+	tx = db.Exec(insertStmt)
+	if tx.Error != nil {
+		log.Fatalln("Can't send query: ", tx.Error)
+	}
+	insertStmt = `insert into "Trade" values
+	(1, 1, '2020-01-01', 1001, 2001, 301, 4001)
+	(1, 1, '2020-01-01', 1002, 2002, 302, 4002)
+	(1, 1, '2020-01-01', 1003, 2003, 303, 4003)
+	(1, 2, '2020-01-01', 1004, 2004, 304, 4004)
+	(1, 2, '2020-01-01', 1005, 2005, 305, 4005)
+	(1, 2, '2020-01-01', 1006, 2006, 306, 4006)
+	(1, 1, '2020-01-01', 1007, 2007, 307, 4007)`
 }
